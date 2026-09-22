@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="natBgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#060913"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="480" rx="12" fill="url(#natBgGrad)"/>
+  <rect x="1" y="1" width="898" height="478" rx="11" stroke="#334155" stroke-opacity="0.5"/>
+
+  <!-- Meta -->
+  <text x="32" y="40" font-family="'JetBrains Mono', monospace" font-size="13" fill="#38bdf8" font-weight="600">SECURE COMPUTE EGRESS // AWS ARCHITECTURE</text>
+  <text x="32" y="65" font-family="'Inter', sans-serif" font-size="18" fill="#f8fafc" font-weight="700">Private EC2 Instances with Managed NAT Gateway</text>
+
+  <!-- Flow Boxes -->
+  <!-- 1. Internet / Outside World -->
+  <g transform="translate(40, 140)">
+    <rect width="180" height="260" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="90" y="32" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8">PUBLIC INTERNET</text>
+    
+    <rect x="20" y="55" width="140" height="45" rx="6" fill="#1e293b" stroke="#334155"/>
+    <text x="90" y="82" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#f8fafc">External Repos / OS</text>
+
+    <rect x="20" y="115" width="140" height="45" rx="6" fill="#1e293b" stroke="#334155"/>
+    <text x="90" y="142" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#f8fafc">Third-Party APIs</text>
+
+    <rect x="20" y="175" width="140" height="45" rx="6" fill="#1e293b" stroke="#ef4444" stroke-opacity="0.5"/>
+    <text x="90" y="195" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#f87171">Direct Inbound</text>
+    <text x="90" y="210" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#f87171">BLOCKED ✕</text>
+  </g>
+
+  <!-- Arrow from Public to IGW -->
+  <path d="M220 220 L275 220" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 4"/>
+  <polygon points="275,216 285,220 275,224" fill="#38bdf8"/>
+
+  <!-- 2. Public Subnet -->
+  <g transform="translate(290, 110)">
+    <rect width="250" height="320" rx="8" fill="#0284c7" fill-opacity="0.08" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="20" y="30" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38bdf8" font-weight="600">PUBLIC SUBNET (10.0.1.0/24)</text>
+    
+    <!-- IGW -->
+    <rect x="20" y="50" width="210" height="45" rx="6" fill="#1e293b" stroke="#38bdf8"/>
+    <text x="125" y="77" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#38bdf8" font-weight="600">Internet Gateway (IGW)</text>
+
+    <!-- NAT Gateway -->
+    <rect x="20" y="130" width="210" height="85" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="125" y="158" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#f59e0b" font-weight="700">AWS NAT Gateway</text>
+    <rect x="40" y="170" width="170" height="28" rx="4" fill="#0b1120" stroke="#f59e0b" stroke-opacity="0.4"/>
+    <text x="125" y="189" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#fbbf24">Elastic IP: 54.x.x.x</text>
+
+    <!-- Route Table -->
+    <rect x="20" y="240" width="210" height="55" rx="6" fill="#0b1120" stroke="#334155"/>
+    <text x="35" y="260" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8">Public Route Table:</text>
+    <text x="35" y="280" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8">0.0.0.0/0 -> Target: IGW</text>
+  </g>
+
+  <!-- Arrow between Public & Private -->
+  <path d="M540 220 L600 220" stroke="#10b981" stroke-width="2"/>
+  <polygon points="545,216 535,220 545,224" fill="#10b981"/>
+
+  <!-- 3. Private Subnet -->
+  <g transform="translate(610, 110)">
+    <rect width="250" height="320" rx="8" fill="#10b981" fill-opacity="0.08" stroke="#10b981" stroke-width="1.5"/>
+    <text x="20" y="30" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34d399" font-weight="600">PRIVATE SUBNET (10.0.10.0/24)</text>
+
+    <!-- EC2 Instance 1 -->
+    <rect x="20" y="55" width="210" height="80" rx="6" fill="#1e293b" stroke="#334155"/>
+    <text x="35" y="80" font-family="'Inter', sans-serif" font-size="12" fill="#f8fafc" font-weight="600">Amazon EC2 (Private-01)</text>
+    <text x="35" y="100" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10b981">IP: 10.0.10.25 (No Public IP)</text>
+    <text x="35" y="120" font-family="'Inter', sans-serif" font-size="10" fill="#94a3b8">Linux / Docker / App</text>
+
+    <!-- EC2 Instance 2 -->
+    <rect x="20" y="145" width="210" height="75" rx="6" fill="#1e293b" stroke="#334155"/>
+    <text x="35" y="170" font-family="'Inter', sans-serif" font-size="12" fill="#f8fafc" font-weight="600">Amazon EC2 (Private-02)</text>
+    <text x="35" y="190" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10b981">IP: 10.0.10.36 (No Public IP)</text>
+    <text x="35" y="208" font-family="'Inter', sans-serif" font-size="10" fill="#94a3b8">Worker / Batch Tasks</text>
+
+    <!-- Route Table -->
+    <rect x="20" y="240" width="210" height="55" rx="6" fill="#0b1120" stroke="#334155"/>
+    <text x="35" y="260" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8">Private Route Table:</text>
+    <text x="35" y="280" font-family="'JetBrains Mono', monospace" font-size="10" fill="#f59e0b">0.0.0.0/0 -> NAT-GW</text>
+  </g>
+</svg>
