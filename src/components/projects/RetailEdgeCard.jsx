@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   AlertTriangle,
@@ -8,6 +9,9 @@ import {
   Layers,
   Server,
   ShieldCheck,
+  Image as ImageIcon,
+  Code2,
+  ExternalLink,
 } from "lucide-react";
 import { portfolioData } from "../../data/portfolioData";
 
@@ -30,74 +34,114 @@ export const RetailEdgeCard = () => {
   const networking = featuredProject.networking;
 
   return (
-    <div className="rounded-2xl bg-slate-900/80 border border-slate-800 shadow-2xl overflow-hidden">
+    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 shadow-2xl">
+      <div className="border-b border-slate-800 p-6 sm:p-8">
+        <div className="mb-3 flex flex-wrap items-center gap-2">
+          <span className="rounded-md border border-aws-amber/30 bg-aws-amber/10 px-2.5 py-1 font-mono text-[11px] text-aws-amber">
+            Featured Project
+          </span>
 
-      <div className="p-6 sm:p-8 border-b border-slate-800">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className="px-2.5 py-1 rounded-md bg-aws-amber/10 border border-aws-amber/30 text-[11px] font-mono text-aws-amber">
-                Featured Project
-              </span>
+          <span className="rounded-md border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 font-mono text-[11px] text-emerald-400">
+            {featuredProject.status}
+          </span>
 
-              <span className="px-2.5 py-1 rounded-md bg-emerald-400/10 border border-emerald-400/20 text-[11px] font-mono text-emerald-400">
-                Completed
-              </span>
-
-              <span className="px-2.5 py-1 rounded-md bg-slate-800 border border-slate-700 text-[11px] font-mono text-slate-400">
-                {featuredProject.classification}
-              </span>
-            </div>
-
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              {featuredProject.title}
-            </h3>
-
-            <p className="text-sm text-aws-amber font-mono mt-1">
-              {featuredProject.subtitle}
-            </p>
-
-            <p className="text-sm text-slate-400 leading-relaxed mt-4 max-w-3xl">
-              {featuredProject.summary}
-            </p>
-          </div>
+          <span className="rounded-md border border-slate-700 bg-slate-800 px-2.5 py-1 font-mono text-[11px] text-slate-400">
+            {featuredProject.classification}
+          </span>
         </div>
+
+        <h3 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+          {featuredProject.title}
+        </h3>
+
+        <p className="mt-1 font-mono text-sm text-aws-amber">
+          {featuredProject.subtitle}
+        </p>
+
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">
+          {featuredProject.summary}
+        </p>
 
         <div className="mt-5 flex flex-wrap gap-1.5">
           {featuredProject.technologies.map((technology) => (
             <span
               key={technology}
-              className="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] font-mono text-slate-300"
+              className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-mono text-[11px] text-slate-300"
             >
               {technology}
             </span>
           ))}
         </div>
+
+        {featuredProject.repositoryUrl && (
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <a
+              href={featuredProject.repositoryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-aws-amber px-4 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-amber-300"
+            >
+              <Code2 className="h-4 w-4" />
+              View Project on GitHub
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+
+            <span className="text-xs text-slate-500">
+              Explore the source code and documentation.
+            </span>
+          </div>
+        )}
       </div>
 
-      <div className="p-6 sm:p-8 space-y-9">
+      <div className="space-y-8 p-6 sm:p-8">
+        {featuredProject.architectureImage && (
+          <section>
+            <h4 className="mb-4 flex items-center gap-2 text-sm font-bold text-white">
+              <ImageIcon className="h-4 w-4 text-sky-400" />
+              AWS Architecture Diagram
+            </h4>
+
+            <a
+              href={featuredProject.architectureImage}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block overflow-hidden rounded-xl border border-slate-700 bg-slate-950 p-2 transition-colors hover:border-aws-amber/60 sm:p-4"
+              title="Open architecture diagram in a new tab"
+            >
+              <img
+                src={featuredProject.architectureImage}
+                alt="RetailEdge AWS architecture diagram"
+                loading="lazy"
+                className="mx-auto h-auto max-h-[650px] w-full rounded-lg object-contain transition-transform duration-300 group-hover:scale-[1.01]"
+              />
+
+              <p className="mt-3 text-center text-xs text-slate-500">
+                View full-size architecture diagram ↗
+              </p>
+            </a>
+          </section>
+        )}
 
         <section>
-          <h4 className="text-sm font-bold text-white flex items-center gap-2 mb-4">
-            <AlertTriangle className="w-4 h-4 text-amber-400" />
-            The Problem
+          <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-white">
+            <AlertTriangle className="h-4 w-4 text-amber-400" />
+            Business Problem
           </h4>
 
-          <p className="text-sm text-slate-300 leading-relaxed mb-5">
+          <p className="mb-4 max-w-3xl text-sm leading-relaxed text-slate-300">
             {featuredProject.businessProblem.scenario}
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {featuredProject.businessProblem.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-center"
+                className="rounded-xl border border-slate-800 bg-slate-950 p-3 text-center"
               >
-                <div className="text-base font-bold text-aws-amber font-mono">
+                <div className="font-mono text-base font-bold text-aws-amber">
                   {stat.value}
                 </div>
-
-                <div className="text-[10px] text-slate-400 mt-0.5 leading-tight">
+                <div className="mt-1 text-[10px] leading-tight text-slate-400">
                   {stat.label}
                 </div>
               </div>
@@ -106,73 +150,71 @@ export const RetailEdgeCard = () => {
         </section>
 
         <section>
-          <h4 className="text-sm font-bold text-white flex items-center gap-2 mb-4">
-            <Layers className="w-4 h-4 text-sky-400" />
-            Architecture Overview
+          <h4 className="mb-4 flex items-center gap-2 text-sm font-bold text-white">
+            <Layers className="h-4 w-4 text-sky-400" />
+            Infrastructure Overview
           </h4>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-              <Cloud className="w-4 h-4 text-sky-400 mb-2" />
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
+              <Cloud className="mb-2 h-4 w-4 text-sky-400" />
               <div className="text-xs text-slate-400">VPC</div>
-              <div className="text-sm font-mono text-white mt-1">
+              <div className="mt-1 font-mono text-sm text-white">
                 {networking.vpc}
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-              <Globe className="w-4 h-4 text-blue-400 mb-2" />
+            <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
+              <Globe className="mb-2 h-4 w-4 text-blue-400" />
               <div className="text-xs text-slate-400">Subnets</div>
-              <div className="text-sm font-mono text-white mt-1">
-                {networking.subnetCount} across{" "}
-                {networking.availabilityZones} AZs
+              <div className="mt-1 font-mono text-sm text-white">
+                {networking.subnetCount} across {networking.availabilityZones}{" "}
+                AZs
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-              <Server className="w-4 h-4 text-amber-400 mb-2" />
+            <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
+              <Server className="mb-2 h-4 w-4 text-amber-400" />
               <div className="text-xs text-slate-400">NAT Gateways</div>
-              <div className="text-sm font-mono text-white mt-1">
+              <div className="mt-1 font-mono text-sm text-white">
                 {networking.natGateways}
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-              <ShieldCheck className="w-4 h-4 text-red-400 mb-2" />
+            <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
+              <ShieldCheck className="mb-2 h-4 w-4 text-red-400" />
               <div className="text-xs text-slate-400">Security Groups</div>
-              <div className="text-sm font-mono text-white mt-1">
-                {Array.isArray(networking.securityGroups)
-                  ? networking.securityGroups.length
-                  : networking.securityGroups}
+              <div className="mt-1 font-mono text-sm text-white">
+                {networking.securityGroups.length}
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-              <Database className="w-4 h-4 text-emerald-400 mb-2" />
+            <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
+              <Database className="mb-2 h-4 w-4 text-emerald-400" />
               <div className="text-xs text-slate-400">Data Layer</div>
-              <div className="text-sm font-mono text-white mt-1">
+              <div className="mt-1 font-mono text-sm text-white">
                 RDS + Redis
               </div>
             </div>
-
           </div>
         </section>
 
         <section>
-          <h4 className="text-sm font-bold text-white mb-3">
-            Implementation
+          <h4 className="mb-3 text-sm font-bold text-white">
+            Implementation Approaches
           </h4>
 
-          <div className="flex gap-2 mb-5">
+          <div className="mb-4 flex flex-wrap gap-2">
             {featuredProject.implementations.map((implementation) => (
               <button
                 key={implementation.id}
+                type="button"
                 onClick={() => setActiveImpl(implementation.id)}
-                className={`px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all ${
+                aria-pressed={activeImpl === implementation.id}
+                className={`rounded-lg px-4 py-2 text-xs font-semibold transition-all ${
                   activeImpl === implementation.id
                     ? "bg-aws-amber text-slate-950 shadow-md shadow-amber-500/20"
-                    : "bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700"
+                    : "border border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white"
                 }`}
               >
                 {implementation.label}
@@ -181,58 +223,55 @@ export const RetailEdgeCard = () => {
           </div>
 
           {activeImplementation && (
-            <div className="rounded-xl bg-slate-950 border border-slate-800 p-5 sm:p-6">
-
-              <h5 className="text-sm font-bold text-white mb-2">
+            <div className="rounded-xl border border-slate-800 bg-slate-950 p-5 sm:p-6">
+              <h5 className="mb-2 text-sm font-bold text-white">
                 {activeImplementation.title}
               </h5>
 
-              <p className="text-xs text-slate-400 leading-relaxed mb-5 max-w-3xl">
+              <p className="mb-4 max-w-3xl text-xs leading-relaxed text-slate-400">
                 {activeImplementation.description}
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {activeImplementation.highlights.map((highlight) => (
                   <div
                     key={highlight}
-                    className="flex items-start gap-2.5 p-3 rounded-lg bg-slate-900 border border-slate-800"
+                    className="flex items-start gap-2.5 rounded-lg border border-slate-800 bg-slate-900 p-3"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-
-                    <span className="text-xs text-slate-300 leading-relaxed">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                    <span className="text-xs leading-relaxed text-slate-300">
                       {highlight}
                     </span>
                   </div>
                 ))}
               </div>
-
             </div>
           )}
         </section>
 
         <section>
-          <h4 className="text-sm font-bold text-white flex items-center gap-2 mb-4">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            Architecture & Security Highlights
+          <h4 className="mb-4 flex items-center gap-2 text-sm font-bold text-white">
+            <ShieldCheck className="h-4 w-4 text-emerald-400" />
+            Key Design Highlights
           </h4>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {featuredProject.architectureHighlights.map((highlight) => (
               <div
                 key={highlight.point}
-                className="flex items-start gap-3 p-3 rounded-lg bg-slate-950/60 border border-slate-800/60"
+                className="flex items-start gap-3 rounded-lg border border-slate-800/60 bg-slate-950/60 p-3"
               >
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
 
-                <div className="flex-1 min-w-0">
-                  <span className="text-xs text-slate-300 leading-relaxed">
+                <div className="min-w-0 flex-1">
+                  <span className="text-xs leading-relaxed text-slate-300">
                     {highlight.point}
                   </span>
 
                   <span
-                    className={`ml-2 px-1.5 py-0.5 rounded text-[10px] font-mono border ${
+                    className={`ml-2 inline-block rounded border px-1.5 py-0.5 font-mono text-[10px] ${
                       tagColors[highlight.tag] ||
-                      "text-slate-400 bg-slate-800 border-slate-700"
+                      "border-slate-700 bg-slate-800 text-slate-400"
                     }`}
                   >
                     {highlight.tag}
@@ -242,7 +281,6 @@ export const RetailEdgeCard = () => {
             ))}
           </div>
         </section>
-
       </div>
     </div>
   );

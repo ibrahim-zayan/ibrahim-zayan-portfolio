@@ -1,4 +1,5 @@
-﻿export const portfolioData = {
+﻿
+export const portfolioData = {
   personalInfo: {
     fullName: 'Ibrahim Reda Ibrahim Zayan',
     shortName: 'Ibrahim Zayan',
@@ -8,9 +9,9 @@
     phone: '01013125231',
     email: 'ibrahimzayan977@gmail.com',
     linkedin: 'https://linkedin.com/in/ibrahim-zayan',
-    github: null,
-    cvUrl: '/Ibrahim_Zayan_CV.pdf',
-    profileImage: '/profile.jpg',
+    github: 'https://github.com/ibrahim-zayan',
+    cvUrl: '/ibrahim-zayan-portfolio/Ibrahim_Zayan_CV.pdf',
+    profileImage: '/ibrahim-zayan-portfolio/profile.jpg',
 
     status: {
       isAvailable: true,
@@ -18,7 +19,7 @@
     },
 
     professionalSummary:
-      'Junior Cloud Engineer focused on AWS cloud infrastructure, networking, Linux, and Infrastructure as Code with Terraform. I build practical cloud projects and hands-on labs to strengthen my understanding of cloud architecture, security, networking, and infrastructure automation.',
+      'Junior Cloud Engineer focused on AWS, networking, Linux, and Terraform. Building practical cloud infrastructure projects with an emphasis on security, scalability, and reliability.',
 
     education: {
       degree: 'B.Sc. in Communications and Computer Engineering',
@@ -28,8 +29,7 @@
     },
 
     aboutParagraphs: [
-      'I am building my foundation in Cloud Engineering through structured AWS and Linux training combined with hands-on practice. My learning focuses on cloud infrastructure, networking, security fundamentals, Infrastructure as Code with Terraform, and practical AWS architectures.',
-      'I use hands-on labs and realistic project simulations to turn concepts into practical experience, and I continue expanding my skills across AWS services, Linux administration, networking, and cloud infrastructure design.',
+      'Building practical skills in AWS Cloud Engineering, Linux administration, networking, and Terraform through hands-on labs and infrastructure projects.',
     ],
 
     languages: [
@@ -50,7 +50,7 @@
       id: 'aws-cloud',
       title: 'AWS Cloud Fundamentals',
       description:
-        'Hands-on experience with core AWS services including VPC, EC2, S3, ALB, Auto Scaling, RDS, and IAM through NTI training and cloud labs.',
+        'Hands-on practice with VPC, EC2, S3, ALB, Auto Scaling, RDS, and IAM through training and cloud labs.',
       icon: 'Cloud',
       badge: 'AWS / Cloud Labs',
     },
@@ -58,7 +58,7 @@
       id: 'iac-terraform',
       title: 'Infrastructure as Code',
       description:
-        'Practical use of Terraform to define AWS infrastructure as code, organizing resources, writing reproducible configurations, and managing VPCs, subnets, and compute.',
+        'Using Terraform to define and provision AWS infrastructure, including VPCs, subnets, and compute resources.',
       icon: 'Binary',
       badge: 'Terraform / IaC',
     },
@@ -66,7 +66,7 @@
       id: 'networking',
       title: 'Networking & VPC Design',
       description:
-        'Solid grasp of OSI & TCP/IP models, IPv4 subnetting (CIDR), DNS, DHCP, NAT, routing, and VPC network segmentation with public, private, and database subnets.',
+        'Understanding TCP/IP, subnetting, DNS, DHCP, NAT, routing, and AWS network segmentation.',
       icon: 'Network',
       badge: 'TCP/IP & Subnetting',
     },
@@ -74,7 +74,7 @@
       id: 'linux-os',
       title: 'Ubuntu Linux & Shell',
       description:
-        'Linux administration essentials, command-line operations, file permissions, package management, and secure remote access via SSH based on Mahara Tech training.',
+        'Linux command-line fundamentals, file permissions, package management, and SSH.',
       icon: 'Terminal',
       badge: 'Ubuntu / CLI',
     },
@@ -150,13 +150,17 @@
     subtitle: 'AWS Three-Tier Cloud Migration Simulation',
     classification: 'Personal Project / Cloud Architecture Simulation',
     status: 'Completed',
-
+repositoryUrl: 'https://github.com/ibrahim-zayan/retailedge-aws-migration',
     summary:
-      'Designed and implemented a scalable AWS three-tier architecture for a simulated e-commerce platform, covering networking, security, compute, data, high availability, and Infrastructure as Code.',
+      'A three-tier AWS migration project using Terraform, with secure networking, load balancing, Auto Scaling, and a Multi-AZ database design.',
+
+    // Architecture image in the public folder
+    architectureImage:
+      '/ibrahim-zayan-portfolio/retailedge-architecture.png',
 
     businessProblem: {
       scenario:
-        'RetailEdge is a simulated mid-size e-commerce company operating on 3 bare-metal LAMP servers in a colocation environment. The existing setup suffered from scalability and availability issues during peak traffic. The goal was to design and implement a scalable, highly available AWS architecture.',
+        'A simulated e-commerce company migrating from three on-premises servers to a scalable, highly available AWS architecture.',
 
       stats: [
         {
@@ -204,7 +208,6 @@
       availabilityZones: 2,
       subnetCount: 6,
       natGateways: 2,
-      securityGroups: 3,
 
       subnets: [
         {
@@ -240,23 +243,24 @@
       ],
 
       securityGroups: [
-  'ALB-SG — HTTPS :443 inbound from Internet',
-  'App-SG — Port :8080 inbound from ALB-SG only',
-  'DB-SG — MySQL :3306 inbound from App-SG only',
-],
+        'ALB-SG — HTTPS :443 inbound from Internet',
+        'App-SG — Port :8080 inbound from ALB-SG only',
+        'DB-SG — MySQL :3306 inbound from App-SG only',
+      ],
     },
+
     implementations: [
       {
         id: 'console',
         label: 'AWS Console',
         title: 'AWS Console Implementation',
         description:
-          'Built and validated the three-tier AWS architecture through the AWS Management Console to gain hands-on understanding of each infrastructure component.',
+          'Implemented the architecture through the AWS Management Console to practice configuring its main components.',
 
         highlights: [
-          'VPC with public, private application, and database subnets across 2 Availability Zones',
-          'Application Load Balancer, Launch Template, and Auto Scaling Group',
-          'RDS MySQL Multi-AZ and ElastiCache Redis for the data layer',
+          'VPC and six subnets across two Availability Zones',
+          'Application Load Balancer and Auto Scaling Group',
+          'RDS MySQL Multi-AZ and ElastiCache Redis',
           'CloudFront, Route 53, IAM, SSM, and Security Groups',
         ],
       },
@@ -266,45 +270,40 @@
         label: 'Terraform',
         title: 'Terraform Implementation',
         description:
-          'Recreated the validated AWS architecture using Terraform to practice Infrastructure as Code, repeatability, and organized infrastructure provisioning.',
+          'Used Terraform to define AWS infrastructure as code and practice repeatable resource provisioning.',
 
         highlights: [
-          'AWS networking, subnets, route tables, NAT Gateways, and Security Groups',
+          'VPC, subnets, route tables, NAT Gateways, and Security Groups',
           'EC2 Launch Template, ALB, Target Groups, and Auto Scaling',
           'RDS MySQL, ElastiCache Redis, and S3 resources',
-          'Terraform variables, outputs, resource organization, plan, and apply workflow',
+          'Variables, outputs, planning, and applying infrastructure changes',
         ],
       },
     ],
 
     architectureHighlights: [
       {
-        point:
-          'Three-tier architecture separating web, application, and data layers',
+        point: 'Three-tier architecture separating web, application, and data layers',
         tag: 'Architecture',
       },
       {
-        point: 'Multi-AZ design across 2 Availability Zones',
+        point: 'Multi-AZ design across two Availability Zones',
         tag: 'Resilience',
       },
       {
-        point:
-          'Public, private application, and private database subnet separation',
+        point: 'Public, private application, and private database subnets',
         tag: 'Networking',
       },
       {
-        point:
-          'Security Groups control traffic between each application tier',
+        point: 'Security Groups restrict traffic between application tiers',
         tag: 'Security',
       },
       {
-        point:
-          'Auto Scaling provides elastic compute capacity for changing demand',
+        point: 'Auto Scaling adjusts compute capacity to demand',
         tag: 'Scalability',
       },
       {
-        point:
-          'RDS Multi-AZ provides database redundancy and automated failover',
+        point: 'RDS Multi-AZ supports database redundancy and failover',
         tag: 'Resilience',
       },
     ],
@@ -316,7 +315,7 @@
       title: 'AWS VPC Infrastructure with Terraform',
       category: 'Infrastructure as Code',
       description:
-        'Designed and provisioned AWS VPC infrastructure using Terraform, applying network segmentation with public and private subnets, route tables, and Security Groups.',
+        'Provisioned AWS VPC infrastructure with public and private subnets, route tables, and Security Groups using Terraform.',
       technologies: [
         'Terraform',
         'Amazon VPC',
@@ -330,7 +329,7 @@
       title: 'Private EC2 + NAT Gateway',
       category: 'Cloud Networking',
       description:
-        'Configured EC2 instances in private subnets with outbound internet access through an AWS NAT Gateway, demonstrating private workload patterns and Security Group access control.',
+        'Configured private EC2 workloads with outbound internet access through a NAT Gateway and Security Group access controls.',
       technologies: [
         'Amazon EC2',
         'NAT Gateway',
